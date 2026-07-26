@@ -1,0 +1,9 @@
+ul {
+  width:300px ;
+  justify-content: space-between;
+grid-template-rows:min ;
+display: grid;
+align-items: center;
+
+
+}
