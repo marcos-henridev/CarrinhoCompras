@@ -1,27 +1,10 @@
-import { useState } from "react";
-import styled from "@emotion/styled";
 import Cart from "../../assets/cartLogo.svg";
-
-const Nav = styled.nav`
-  width: 70%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Ul = styled.ul`
-  display: flex;
-  color: black;
-  gap: 15px;
-  list-style: none;
-`;
+import { Nav, Ul } from "./style";
+import { useRecoilValue } from "recoil";
+import { navegacaoState } from "../../utils/atom";
 
 function Navegacao() {
-  const [attCompras, setAttCompras] = useState([
-    "CARRINHO",
-    "PAGAMENTO",
-    "CONFIRMAÇÃO",
-  ]);
+  const attCompras = useRecoilValue(navegacaoState);
 
   return (
     <>
@@ -31,8 +14,8 @@ function Navegacao() {
         </div>
         <div>
           <Ul>
-            {attCompras.map((item) => (
-              <li>{item}</li>
+            {attCompras.map((item, index) => (
+              <li key={index}>{item}</li>
             ))}
           </Ul>
         </div>

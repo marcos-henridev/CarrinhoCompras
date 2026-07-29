@@ -1,62 +1,29 @@
-import style from "@emotion/styled";
+import {
+  Section,
+  H3,
+  Caixa,
+  Produto,
+  Preco,
+  Quantidade,
+  Entrega,
+  Cupon,
+  Label,
+  Input,
+  Botao,
+  P,
+} from "./style.jsx";
 
-const Section = style.section`
-width: 100%;
-font-size:13px;
-`;
-const H3 = style.h3`
-border-bottom: 1px solid;
-width: 100%;
-`;
-const Caixa = style.div`
-display: grid;
-grid-template-columns: 2fr 1fr 1fr 1fr ;
-
-
-`;
-const Produto = style.div`
-border:1px solid;
-height:8rem;
-display: grid;
-grid-template-rows: 20px 1fr;
-justify-content: center;
-align-items: center;
-
-`;
-
-const Preco = style(Produto)`
-`;
-const Quantidade = style(Produto)`
-`;
-const Entrega = style(Produto)`
-`;
-const Cupon = style.div`
-
-border:1px solid;
-margin-top: 1rem;
-padding:15px;
-
-`;
-const Label = style.label`
-margin-right: 1rem;
-`;
-const Input = style.input`
-padding: 0.3rem;
-
-`;
-const Botao = style.button`
-padding: 0.3rem;
-
-`;
 function InfoProduto() {
   return (
     <>
-      <Section>
+      <Section className="relative">
         <H3>MEU CARRINHO</H3>
 
         <Caixa>
           <Produto>
-            <p>PRODUTOS</p>
+            <div className="aqui">
+              <P>PRODUTOS</P>
+            </div>
             <div></div>
           </Produto>
           <Preco>
@@ -74,9 +41,33 @@ function InfoProduto() {
         </Caixa>
         <Cupon>
           <Label htmlFor="">CUPOM DE DESCONTO</Label>
-          <Input placeholder="Código" type="text" />
-          <Botao>Adicionar</Botao>
+          <Input className="border" placeholder="Código" type="text" />
+          <Botao className="border bg-gray-200">Adicionar</Botao>
         </Cupon>
+        <div className=" grid grid-cols-2 mt-4 ">
+          <div className=""></div>
+          <div className="flex flex-col gap-5  p-4">
+            <div className="border-b border-gray-300 flex justify-between">
+              <p className="text-[15px] ">SUBTOTAL</p> <span>0,00</span>
+            </div>
+            <div className=" border-b border-gray-300 flex justify-between">
+              <p className="text ">ENTREGA</p>
+              <span>calcular</span>
+            </div>
+            <div className="  border-b border-gray-300 flex justify-between">
+              <p className="text">TOTAL</p> <span>total</span>
+            </div>{" "}
+          </div>
+        </div>
+        <div className="flex gap-5 absolute right-0">
+          <button className="border p-3 hover:bg-gray-200">
+            {" "}
+            Adicionar Produtos
+          </button>
+          <button className="btn-prod text-[15px] font-bold border p-3 bg-green-500 text-white border-green-300 w-[200px]">
+            Fechar Pedido
+          </button>
+        </div>
       </Section>
     </>
   );
