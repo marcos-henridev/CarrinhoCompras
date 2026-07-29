@@ -2,7 +2,8 @@ import { useState } from "react";
 import Home from "./Pages/home";
 import style from "@emotion/styled";
 import Navegacao from "./componentes/navegacoa";
-
+import ApiProduct from "./componentes/ApiProduct";
+import RodaPe from "./componentes/footer";
 const Container = style.div`
   margin: 0;
   
@@ -40,6 +41,9 @@ function App() {
           <Navegacao />
         </Header>
         <Home />
+        <div className="mt-auto bg-[#293032]">
+          <RodaPe />
+        </div>
       </Container>
     </>
   );
