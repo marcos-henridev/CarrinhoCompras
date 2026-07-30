@@ -12,8 +12,11 @@ import {
   Botao,
   P,
 } from "./style.jsx";
+import { useModalProduct } from "../../customizedHook/useModalProduct.js";
 
 function InfoProduto() {
+  const modal = useModalProduct();
+
   return (
     <>
       <Section className="relative">
@@ -41,8 +44,14 @@ function InfoProduto() {
         </Caixa>
         <Cupon>
           <Label htmlFor="">CUPOM DE DESCONTO</Label>
-          <Input className="border" placeholder="Código" type="text" />
-          <Botao className="border bg-gray-200">Adicionar</Botao>
+          <Input
+            className="border border-gray-600 outline-none"
+            placeholder="Código"
+            type="text"
+          />
+          <Botao className="border border-gray-400 hover:bg-gray-200 ">
+            Adicionar
+          </Botao>
         </Cupon>
         <div className=" grid grid-cols-2 mt-4 ">
           <div className=""></div>
@@ -59,12 +68,15 @@ function InfoProduto() {
             </div>{" "}
           </div>
         </div>
-        <div className="flex gap-5 absolute right-0">
-          <button className="border p-3 hover:bg-gray-200">
+        <div className="flex gap-5 ">
+          <button
+            onClick={modal.ModalVerify}
+            className="border p-3 ml-auto rounded-[6px] border-gray-400 hover:bg-gray-200"
+          >
             {" "}
             Adicionar Produtos
           </button>
-          <button className="btn-prod text-[15px] font-bold border p-3 bg-green-500 text-white border-green-300 w-[200px]">
+          <button className=" btn-prod text-[15px] font-bold border rounded-[6px] p-3 bg-green-500 text-white border-green-300 w-[200px] hover:bg-green-600">
             Fechar Pedido
           </button>
         </div>

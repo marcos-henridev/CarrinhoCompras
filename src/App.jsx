@@ -27,7 +27,7 @@ const Header = style.div`
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  box-shadow: 0px 6px 21px -3px #000000;
+  box-shadow: 0px 1px 18px -1px #000000;
 
 `;
 
@@ -36,8 +36,8 @@ function App() {
 
   return (
     <>
-      <Container className="conteiner">
-        <Header>
+      <Container className="conteiner  ">
+        <Header className="bg-[#293032] ">
           <Navegacao />
         </Header>
         <Home />

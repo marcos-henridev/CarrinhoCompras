@@ -1,4 +1,4 @@
-import Cart from "../../assets/cartLogo.svg";
+import Cart from "../../assets/icons8-carrinho-de-compras-48.png";
 import { Nav, Ul } from "./style";
 import { useRecoilValue } from "recoil";
 import { navegacaoState } from "../../utils/atom";
@@ -15,7 +15,9 @@ function Navegacao() {
         <div>
           <Ul>
             {attCompras.map((item, index) => (
-              <li key={index}>{item}</li>
+              <li className="text-[#d5d7d8]" key={index}>
+                {item}
+              </li>
             ))}
           </Ul>
         </div>
