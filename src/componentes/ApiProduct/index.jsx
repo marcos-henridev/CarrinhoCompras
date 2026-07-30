@@ -2,8 +2,25 @@ import { resumeToPipeableStream } from "react-dom/server";
 import { useProdutos } from "../../customizedHook/useProdutos";
 import { P } from "../carrinho/style";
 import { useModalProduct } from "../../customizedHook/useModalProduct";
+import { carrinhoState, produtosState } from "../../utils/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 function ApiProduct() {
+  const setCarrinho = useSetRecoilState(carrinhoState);
+  const arrayProdutos = useRecoilValue(produtosState);
+
+  //função para seleciionar o produto e adicionar no carrinho
+  const adicionarAoCarrinho = (id) => {
+    const produtoEncontrado = arrayProdutos.find((e) => e.id === id);
+    if (!produtoEncontrado) {
+      return;
+    }
+    setCarrinho((prev) => [...prev, produtoEncontrado]);
+    console.log("Excelente!!");
+    console.log(produtoEncontrado);
+  };
+  /////////////////////////
+
   const unModal = useModalProduct();
   const { produtos, loading, erro } = useProdutos();
 
@@ -40,6 +57,12 @@ function ApiProduct() {
             <img src={item.image} alt={produtos.title} width="100" />
             <h2>{item.title}</h2>
             <span className="bg-amber-400 font-extrabold">R$ {item.price}</span>
+            <button
+              onClick={() => adicionarAoCarrinho(item.id)}
+              className="border border-green-900 px-3 py-2 rounded-[0.5rem] bg-green-600 text-white "
+            >
+              Adicionar ao carrinho
+            </button>
           </div>
         ))}
       </section>

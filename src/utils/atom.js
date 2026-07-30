@@ -27,3 +27,8 @@ export const telaProd = atom({
   key: "telaProd",
   default: false,
 });
+
+export const carrinhoState = atom({
+  key: "carrinhoState",
+  default: [],
+});
