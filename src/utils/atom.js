@@ -32,3 +32,12 @@ export const carrinhoState = atom({
   key: "carrinhoState",
   default: [],
 });
+export const inicializadorProdState = atom({
+  key: "inicializadorProd",
+  default: 1,
+});
+
+export const totalProdStaste = atom({
+  key: "totalProdState",
+  default: null,
+});

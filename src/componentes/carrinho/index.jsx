@@ -5,51 +5,81 @@ import {
   Produto,
   Preco,
   Quantidade,
-  Entrega,
+  Total,
   Cupon,
   Label,
   Input,
   Botao,
-  P,
 } from "./style.jsx";
 import { useModalProduct } from "../../customizedHook/useModalProduct.js";
+import { carrinhoState } from "../../utils/atom.js";
+import { useRecoilState } from "recoil";
+import Plus from '../../assets/icons8-mais-24.png'
+import Menos from '../../assets/icons8-menos-50.png'
 
 function InfoProduto() {
+  const [serchProducts, setCarrinho] = useRecoilState(carrinhoState);
   const modal = useModalProduct();
+
+  const adicionarQuantidade = (id) => {
+    setCarrinho((carrinhoAtual) =>
+      carrinhoAtual.map((item) =>
+        item.id === id
+          ? { ...item, quantidade: (item.quantidade ?? 1) + 1 }
+          : item,
+      ),
+    );
+  };
+
+  const diminuirQuantidade = (id) => {
+    setCarrinho((carrinhoAtual) =>
+      carrinhoAtual.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantidade: Math.max(1, (item.quantidade ?? 1) - 1),
+            }
+          : item,
+      ),
+    );
+  };
 
   return (
     <>
       <Section className="relative">
         <H3>MEU CARRINHO</H3>
 
-        <Caixa>
-          <Produto>
-            <div className="aqui">
-              <P>PRODUTOS</P>
-            </div>
-            <div></div>
-          </Produto>
-          <Preco>
-            <p>PREÇO</p>
-            <div></div>
-          </Preco>
-          <Quantidade>
-            <p>QUANT</p>
-            <div></div>
-          </Quantidade>
-          <Entrega>
-            <p>TOTAL</p>
-            <div></div>
-          </Entrega>
-        </Caixa>
+        {serchProducts.map((item) => (
+          <Caixa className="overflow-scroll" key={item.id}>
+            <Produto className="items-center mb-2 max-w-[400px] pl-4">
+              <img className="h-20" src={item.image} alt={item.title} />{" "}
+              {item.title}
+            </Produto>
+            <Preco className="flex items-center justify-center">
+              R$ {item.price.toFixed(2)}
+            </Preco>
+            <Quantidade className="flex items-center justify-center">
+              <button className="" onClick={() => diminuirQuantidade(item.id)}>
+                <img className="h-5" src={Menos} alt="" />
+              </button>
+              <span className="mx-3">{item.quantidade ?? 1}</span>
+              <button className="" onClick={() => adicionarQuantidade(item.id)}>
+                <img className="h-5" src={Plus} alt="" />
+              </button>
+            </Quantidade>
+            <Total className="flex items-center justify-center">
+              R$ {(item.price * (item.quantidade ?? 1)).toFixed(2)}
+            </Total>
+          </Caixa>
+        ))}
         <Cupon>
           <Label htmlFor="">CUPOM DE DESCONTO</Label>
           <Input
-            className="border border-gray-600 outline-none"
+            className="border border-gray-400 outline-none"
             placeholder="Código"
             type="text"
           />
-          <Botao className="border border-gray-400 hover:bg-gray-200 ">
+          <Botao className="border border-gray-400 border-l-0 hover:bg-gray-200 ">
             Adicionar
           </Botao>
         </Cupon>

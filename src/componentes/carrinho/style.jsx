@@ -9,17 +9,20 @@ border-bottom: 1px solid;
 width: 100%;
 `;
 export const Caixa = style.div`
+margin-top:2rem;
 display: grid;
-grid-template-columns: 2fr 1fr 1fr 1fr ;
+grid-template-columns: 1fr 1fr 1fr 1fr ;
+gap:3px;
+max-height: 600px;
 `;
 
 export const Produto = style.div`
+
 border:1px solid;
 height:8rem;
-display: grid;
-grid-template-rows: 20px 1fr;
-justify-content: center;
-align-items: center;
+display: flex;
+gap: 2rem;
+
 
 `;
 
@@ -27,7 +30,7 @@ export const Preco = style(Produto)`
 `;
 export const Quantidade = style(Produto)`
 `;
-export const Entrega = style(Produto)`
+export const Total = style(Produto)`
 `;
 export const Cupon = style.div`
 

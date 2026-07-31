@@ -1,6 +1,4 @@
-import { resumeToPipeableStream } from "react-dom/server";
 import { useProdutos } from "../../customizedHook/useProdutos";
-import { P } from "../carrinho/style";
 import { useModalProduct } from "../../customizedHook/useModalProduct";
 import { carrinhoState, produtosState } from "../../utils/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -15,7 +13,19 @@ function ApiProduct() {
     if (!produtoEncontrado) {
       return;
     }
-    setCarrinho((prev) => [...prev, produtoEncontrado]);
+    setCarrinho((prev) => {
+      const produtoJaExiste = prev.find(
+        (item) => item.id === produtoEncontrado.id,
+      );
+      if (produtoJaExiste) {
+        return prev.map((item) =>
+          item.id === produtoEncontrado.id
+            ? { ...item, quantidade: item.quantidade + 1 }
+            : item,
+        );
+      }
+      return [...prev, { ...produtoEncontrado, quantidade: 1 }];
+    });
     console.log("Excelente!!");
     console.log(produtoEncontrado);
   };
