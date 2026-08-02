@@ -9,7 +9,7 @@ Aplicação de e-commerce desenvolvida para exibir produtos, adicionar itens ao 
 - JavaScript
 - Recoil para gerenciamento de estado
 - Emotion Styled para estilização de componentes
-- Tailwind CSS
+- Tailwind CSS  (para css inicial depois passado para Emotion Styled )
 - Fake Store API para o catálogo de produtos
 - ViaCEP para consulta de endereços
 
