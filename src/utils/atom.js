@@ -41,3 +41,35 @@ export const totalProdStaste = atom({
   key: "totalProdState",
   default: null,
 });
+
+export const cuponState = atom({
+  key: "cuponState",
+  default: "React10",
+});
+
+export const enderecoState = atom({
+  key: "enderecoState",
+  default: null,
+});
+export const cepState = atom({
+  key: "cep",
+  default: "",
+});
+export const erroStateCep = atom({
+  key: "erroStateCep",
+  default: "",
+});
+export const loadingCepState = atom({
+  key: "loadingCepState",
+  default: true,
+});
+
+export const viewFormCepState = atom({
+  key: "viewFormCepState",
+  default: false,
+});
+
+export const validacaoCuponComcluida = atom({
+  key: "validacaoCuponComcluida",
+  default: false,
+});

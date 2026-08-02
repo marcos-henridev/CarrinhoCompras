@@ -5,15 +5,16 @@ width: 100%;
 font-size:13px;
 `;
 export const H3 = style.h3`
+margin-bottom:1rem;
 border-bottom: 1px solid;
 width: 100%;
 `;
 export const Caixa = style.div`
-margin-top:2rem;
+margin-bottom:5px;
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr ;
 gap:3px;
-max-height: 600px;
+
 `;
 
 export const Produto = style.div`
