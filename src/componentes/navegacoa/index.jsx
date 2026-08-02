@@ -1,5 +1,5 @@
 import Cart from "../../assets/icons8-carrinho-de-compras-48.png";
-import { Nav, Ul } from "./style";
+import { CartContainer, Nav, NavItem, NavSection, Ul } from "./style";
 import { useRecoilValue } from "recoil";
 import { navegacaoState } from "../../utils/atom";
 
@@ -9,18 +9,18 @@ function Navegacao() {
   return (
     <>
       <Nav>
-        <div>
+        <CartContainer>
           <img src={Cart} alt="" />
-        </div>
-        <div>
+        </CartContainer>
+        <NavSection>
           <Ul>
             {attCompras.map((item, index) => (
-              <li className="text-[#d5d7d8]" key={index}>
+              <NavItem key={index}>
                 {item}
-              </li>
+              </NavItem>
             ))}
           </Ul>
-        </div>
+        </NavSection>
       </Nav>
     </>
   );

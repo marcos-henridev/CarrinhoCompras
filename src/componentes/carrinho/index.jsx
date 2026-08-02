@@ -10,6 +10,19 @@ import {
   Label,
   Input,
   Botao,
+  ProductImage,
+  QuantityButton,
+  QuantityIcon,
+  QuantityValue,
+  SummaryGrid,
+  AddressContainer,
+  Summary,
+  SummaryRow,
+  SummaryLabel,
+  DeliveryButton,
+  Actions,
+  AddProductsButton,
+  CheckoutButton,
 } from "./style.jsx";
 import { useModalProduct } from "../../customizedHook/useModalProduct.js";
 import {
@@ -36,7 +49,7 @@ function InfoProduto() {
 
   const validarCupon = () => {
     if (cuponDigitado === cupon) {
-      validarCuponDesconto((prev) => !prev);
+      validarCuponDesconto(true);
       alert("PARABENS VOCÊ GANHOU 10% DE DESCONTO");
     }
     setCuponDigitado("");
@@ -89,28 +102,28 @@ function InfoProduto() {
 
   return (
     <>
-      <Section className="relative">
+      <Section>
         <H3>MEU CARRINHO</H3>
 
         {carrinho.map((item) => (
-          <Caixa className=" " key={item.id}>
-            <Produto className="items-center max-w-[400px] pl-4">
-              <img className="h-20" src={item.image} alt={item.title} />{" "}
+          <Caixa key={item.id}>
+            <Produto>
+              <ProductImage src={item.image} alt={item.title} />{" "}
               {item.title}
             </Produto>
-            <Preco className="flex items-center justify-center">
+            <Preco>
               R$ {item.price.toFixed(2)}
             </Preco>
-            <Quantidade className="flex items-center justify-center">
-              <button className="" onClick={() => diminuirQuantidade(item.id)}>
-                <img className="h-5" src={Menos} alt="" />
-              </button>
-              <span className="mx-3">{item.quantidade ?? 1}</span>
-              <button className="" onClick={() => adicionarQuantidade(item.id)}>
-                <img className="h-5" src={Plus} alt="" />
-              </button>
+            <Quantidade>
+              <QuantityButton onClick={() => diminuirQuantidade(item.id)}>
+                <QuantityIcon src={Menos} alt="" />
+              </QuantityButton>
+              <QuantityValue>{item.quantidade ?? 1}</QuantityValue>
+              <QuantityButton onClick={() => adicionarQuantidade(item.id)}>
+                <QuantityIcon src={Plus} alt="" />
+              </QuantityButton>
             </Quantidade>
-            <Total className="flex items-center justify-center">
+            <Total>
               R${item.price * item.quantidade}
             </Total>
           </Caixa>
@@ -118,51 +131,46 @@ function InfoProduto() {
         <Cupon>
           <Label htmlFor="">CUPOM DE DESCONTO</Label>
           <Input
-            className="border border-gray-400 outline-none"
             placeholder="Código"
             type="text"
             value={cuponDigitado}
             onChange={(e) => setCuponDigitado(e.target.value)}
           />
           <Botao
+            $ativo={!vercupon}
+            disabled={vercupon}
             onClick={validarCupon}
-            className="border border-gray-400 border-l-0 hover:bg-gray-200 "
           >
             Adicionar
           </Botao>
         </Cupon>
-        <div className=" grid grid-cols-2 mt-4 ">
-          <div className="">{form && <CepSeach />}</div>
-          <div className="flex flex-col gap-5  p-4">
-            <div className="border-b border-gray-300 flex justify-between">
-              <p className="text-[15px] ">SUBTOTAL</p>{" "}
+        <SummaryGrid>
+          <AddressContainer>{form && <CepSeach />}</AddressContainer>
+          <Summary>
+            <SummaryRow>
+              <SummaryLabel>SUBTOTAL</SummaryLabel>{" "}
               <span>R$ {subtotal.toFixed(2)}</span>
-            </div>
-            <div className=" border-b border-gray-300 flex justify-between">
-              <p className="text ">ENTREGA</p>
+            </SummaryRow>
+            <SummaryRow>
+              <SummaryLabel>ENTREGA</SummaryLabel>
               <span>
-                <button onClick={mostrarForm} lassName="border  cursor-pointer">
+                <DeliveryButton onClick={mostrarForm}>
                   calcular
-                </button>
+                </DeliveryButton>
               </span>
-            </div>
-            <div className="  border-b border-gray-300 flex justify-between">
-              <p>TOTAL</p> <span>total</span>
-            </div>{" "}
-          </div>
-        </div>
-        <div className="flex gap-5 ">
-          <button
-            onClick={modal.ModalVerify}
-            className=" mb-[2rem]  border p-3 ml-auto rounded-[6px] border-gray-400 hover:bg-gray-200"
-          >
+            </SummaryRow>
+           
+          </Summary>
+        </SummaryGrid>
+        <Actions>
+          <AddProductsButton onClick={modal.ModalVerify}>
             {" "}
             Adicionar Produtos
-          </button>
-          <button className="mb-[2rem] btn-prod text-[15px] font-bold border rounded-[6px] p-3 bg-green-500 text-white border-green-300 w-[200px] hover:bg-green-600">
+          </AddProductsButton>
+          <CheckoutButton>
             Fechar Pedido
-          </button>
-        </div>
+          </CheckoutButton>
+        </Actions>
       </Section>
     </>
   );

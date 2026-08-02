@@ -1,21 +1,8 @@
-import Navegacao from "../../componentes/navegacoa";
-import style from "@emotion/styled";
 import InfoProduto from "../../componentes/carrinho";
 import { telaProd } from "../../utils/atom";
 import ApiProduct from "../../componentes/ApiProduct";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { useModalProduct } from "../../customizedHook/useModalProduct";
-import CepSeach from "../../componentes/cepLocalizar";
-
-const Main = style.main`
-width:70% ;
-display:flex;
-flex-direction: column;
-margin: 0 auto;
-margin-top:2rem;
-position: relative;
-
-`;
+import { useRecoilValue } from "recoil";
+import { Main } from "./style";
 
 function Home() {
   const telaViewApi = useRecoilValue(telaProd);

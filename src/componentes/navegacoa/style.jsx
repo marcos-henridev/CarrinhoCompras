@@ -13,3 +13,11 @@ export const Ul = styled.ul`
   gap: 15px;
   list-style: none;
 `;
+
+export const NavSection = styled.div``;
+
+export const CartContainer = styled.div``;
+
+export const NavItem = styled.li`
+  color: #d5d7d8;
+`;

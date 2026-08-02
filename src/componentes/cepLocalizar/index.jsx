@@ -1,38 +1,28 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { useBuscarCep } from "../../customizedHook/useViaCep";
-import {
-  cepState,
-  enderecoState,
-  erroStateCep,
-  loadingCepState,
-  
-} from "../../utils/atom";
-import { P } from "../carrinho/style";
+import { cepState } from "../../utils/atom";
+import { Address, AddressList, Button, Input, Section, Title } from "./style";
 
 function CepSeach() {
   const [cep, setCep] = useRecoilState(cepState);
 
-  const { endereco, erro, loading, buscarCep } = useBuscarCep();
+  const { endereco, buscarCep } = useBuscarCep();
   return (
-    <section className="h-full ">
-      <h1 className="font-bold mb-3 border-b">Localidade</h1>
-      <input
-        className="border p-2 w-[80%]"
+    <Section>
+      <Title>Localidade</Title>
+      <Input
         type="text"
         value={cep}
         onChange={(e) => setCep(e.target.value)}
         placeholder="Digite aqui seu CEP"
       />
-      <button
-        className="border w-9%  border-l-0 hover:bg-gray-200 p-2"
-        onClick={buscarCep}
-      >
+      <Button onClick={buscarCep}>
         Enviar
-      </button>
+      </Button>
 
       {endereco && (
-        <div className=" h-full mt-3">
-          <ul className="flex flex-col h-full">
+        <Address>
+          <AddressList>
             <li>Rua: {endereco.logradouro}</li>
             <li>
               Localidade: {endereco.estado} - {endereco.uf}
@@ -41,11 +31,10 @@ function CepSeach() {
               Estado: {endereco.localidade} 
             </li>
             <li>Região: {endereco.regiao}</li>
-          </ul>
-        </div>
+          </AddressList>
+        </Address>
       )}
-    </section>
+    </Section>
   );
 }
-("");
 export default CepSeach;

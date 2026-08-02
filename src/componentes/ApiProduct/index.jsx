@@ -5,6 +5,16 @@ import {
   produtosState,
 } from "../../utils/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  AddButton,
+  CloseButton,
+  Modal,
+  ModalBackdrop,
+  ModalHeader,
+  Product,
+  ProductPrice,
+  ProductTitle,
+} from "./style";
 
 function ApiProduct() {
   const setCarrinho = useSetRecoilState(carrinhoState);
@@ -49,54 +59,29 @@ function ApiProduct() {
 
   return (
     <>
-      <div
-        onClick={unModal.ModalVerify}
-        className="fixed inset-0    bg-black/40 backdrop-blur-sm"
-      >
-        <section
+      <ModalBackdrop onClick={unModal.ModalVerify}>
+        <Modal
           onClick={(event) => event.stopPropagation()}
-          className=" absolute
-        left-1/2
-        top-1/2
-        w-4/5
-        max-h-[70vh]
-        -translate-x-1/2
-        -translate-y-1/2     
-        rounded-[10px]
-        overflow-y-auto
-        
-        max-w-[37%]
-        bg-[#293032]
-        p-3"
         >
-          <div className="w-ful pl-5 p-2 ">
-            <button
-              onClick={unModal.ModalVerify}
-              className="flex border-2 px-2 rounded-[3px] text-[#747f8a]"
-            >
+          <ModalHeader>
+            <CloseButton onClick={unModal.ModalVerify}>
               X
-            </button>
-          </div>{" "}
+            </CloseButton>
+          </ModalHeader>{" "}
           {produtos.map((item) => (
-            <div
-              className="rounded-[10px] mb-1 bg-[#3e4c50] grid grid-cols-4 items-center place-content-center  text-white  h-[180px]  px-10"
-              key={item.id}
-            >
+            <Product key={item.id}>
               <img src={item.image} alt={produtos.title} width="70" />
-              <h2 className="text-[15px]">{item.title}</h2>
-              <span className=" font-extrabold flex items-center justify-center">
+              <ProductTitle>{item.title}</ProductTitle>
+              <ProductPrice>
                 R$ {item.price}
-              </span>
-              <button
-                onClick={() => adicionarAoCarrinho(item.id)}
-                className="border border-green-600  py-2 rounded-[0.5rem] bg-green-600 text-white "
-              >
+              </ProductPrice>
+              <AddButton onClick={() => adicionarAoCarrinho(item.id)}>
                 Adicionar
-              </button>
-            </div>
+              </AddButton>
+            </Product>
           ))}
-        </section>
-      </div>
+        </Modal>
+      </ModalBackdrop>
     </>
   );
 }
