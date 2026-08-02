@@ -41,8 +41,6 @@ function ApiProduct() {
       //se passar pelo if retirna entao mo porduto com a quantidade +1
       return [...prev, { ...produtoEncontrado, quantidade: 1 }];
     });
-    console.log("Excelente!!");
-    console.log(produtoEncontrado);
   };
   /////////////////////////
 
