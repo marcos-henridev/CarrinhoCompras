@@ -1,0 +1,26 @@
+#Nome do workflow, aparece na 'Actions'
+name: Pipeline CI/CD 
+# defini quando o pipilane será disparado
+on: 
+  push: 
+    branches: 
+        - master
+  workflow_dispatch: # habilitar o botao run workflow no Git Actions
+jobs:
+#Primeiro job: build
+  build:
+    runs-on: ubuntu-latest #imagem da maquina usada no CI
+    steps:
+       - name: checagem do código
+         uses: actions/checkout@v6
+
+       - name: checagem do Node
+         uses: actions/setup-node@v7
+         with:
+          node-version: '24'
+
+       - name: Instalação das dependências
+         run: npm install 
+
+       - name: Rodar a build
+         run: npm run build
